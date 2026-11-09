@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qec-utility-estimation"
+version = "0.1.0"
+description = "Resource estimation for fault-tolerant quantum computing in High Energy Physics"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "cirq-core>=1.6.1",
+    "scipy>=1.15.3",
+]
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.6.5",
+    "nbformat>=5.11.1",
+    "pytest>=8.4.2",
+    "pytest-cov>=6.0.0",
+    "ruff==0.15.14",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+# PLR0917 is a preview rule, so preview mode is on, and explicit-preview-rules
+# keeps every other preview rule off unless selected by its exact code. Preview
+# mode also turns on the preview behavior of the stable rules selected below (in
+# ruff 0.15.14: F401, F811, F822, UP006, UP019 and UP037) and can drop deprecated
+# rules from a prefix selection. A ruff upgrade can change each of these, which
+# is why the dev group pins ruff exactly.
+preview = true
+explicit-preview-rules = true
+select = [
+    "E",        # pycodestyle errors
+    "W",        # pycodestyle warnings
+    "F",        # pyflakes
+    "I",        # isort
+    "UP",       # pyupgrade
+    "C901",     # cyclomatic complexity above max-complexity
+    "PLR0917",  # positional parameters above max-positional-args
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pylint]
+max-positional-args = 5
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not slow' --import-mode=importlib"
+markers = [
+    "slow: marks tests as slow (run with '-m slow', or all with '-m \"\"')",
+]
