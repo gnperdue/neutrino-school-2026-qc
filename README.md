@@ -5,7 +5,7 @@ quantum computing: one circuit for carbon on a small lattice, priced piece by
 piece. It holds the library modules the calculation uses, their tests, and a
 script that prints the calculation in the order of the slides.
 
-Exported 2026-11-09 from commit `5b76bc4882e8306428abf3eaf6df530ad4eb7f01`.
+Exported 2026-11-10 from commit `d0c80b1ab6c08791b4d70b73eb3ec086f3a7a1d7`.
 
 ## Quickstart
 
