@@ -622,9 +622,9 @@ class Synthesis:
     of the 2033 budget.
 
     N counts every rotation and rounded angle priced. An unpriced preparation's own
-    are not in it: one that spent carbon's allowance in walk steps would bring about
-    30 times the circuit's rotations, and raise each one's price from 34 T to 40 T,
-    a walk step's by 0.2%.
+    are not in it: one that spent carbon's allowance on uses of H's block encoding
+    would bring about 30 times the circuit's rotations, and raise each one's price
+    from 34 T to 40 T, a walk step's by 0.2%.
     """
 
     rotation_count: int  # N, every rotation and rounded angle priced
@@ -821,8 +821,8 @@ class OnePerToffoli:
     energy_measurement: int
     all_but_preparations: int
     whole: int | None  # None where the preparation is unpriced
-    allowance_in_walk_steps: float
-    rule_of_thumb_mev: float | None  # lambda over those steps; None with nothing left
+    allowance_in_walk_steps: float  # the uses of H's block encoding it pays for
+    rule_of_thumb_mev: float | None  # lambda over those uses; None with nothing left
 
     @property
     def everything_priced(self) -> int:
@@ -1037,15 +1037,19 @@ class OneCircuit:
 
     @property
     def allowance_in_walk_steps(self) -> float:
-        """The allowance, as a number of walk steps."""
+        """The allowance over one walk step's price: the uses of H's block encoding,
+        each with its reflection, that one preparation can afford. The energy
+        measurement's own walk is priced apart, in walk_t; a preparation by projection
+        would run the same circuit again and pay for it out of the allowance."""
         return self.allowance_t / self.walk_step_t
 
     @property
     def rule_of_thumb_mev(self) -> float | None:
-        """lambda over the allowance's walk steps, in MeV. Projecting out the ground
-        state takes about lambda / (gamma Delta) steps, with gamma the trial state's
-        overlap and Delta the gap, so this is the least gamma Delta the allowance pays
-        for. None where nothing is left for the preparations, so no gap is paid for."""
+        """lambda over the uses of H's block encoding the allowance pays for, in MeV.
+        Projecting out the ground state takes about lambda / (gamma Delta) uses, with
+        gamma the trial state's overlap and Delta the gap, so this is the least gamma
+        Delta the allowance pays for. None where nothing is left for the preparations,
+        so no gap is paid for."""
         if self.allowance_t <= 0.0:
             return None
         return self.lattice.one_norm_mev / self.allowance_in_walk_steps

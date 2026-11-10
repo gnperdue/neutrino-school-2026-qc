@@ -124,13 +124,14 @@ def test_carbon_has_no_table_so_its_preparation_is_unpriced() -> None:
     assert circuit.loads_share is None
 
 
-def test_carbon_strength_band_gives_the_allowance_and_the_steps_it_buys() -> None:
+def test_carbon_strength_band_gives_the_allowance_and_the_uses_it_pays_for() -> None:
     """What each preparation may cost for the circuit to fit the 2033 budget.
 
     Take the budget of 10^9, subtract everything priced, and share what is left over
     the preparations. A stronger response needs fewer preparations, so each may cost
-    more. That is 17 to 24 million T each, or 1,572 to 2,262 walk steps. The insertion
-    has no rotations on this lattice, so the strength does not move the rotation count.
+    more. That is 17 to 24 million T each, which pays for 1,572 to 2,262 uses of H's
+    block encoding at a walk step's price. The insertion has no rotations on this
+    lattice, so the strength does not move the rotation count.
     """
     weak = price_one_circuit(
         CARBON_12, box_side=4, register_bits=12, strength=3.0, current_one_norm=64.0
@@ -303,9 +304,10 @@ def test_argon_on_the_larger_box_is_over_on_the_measurement_alone() -> None:
 
     The energy measurement alone is 1.3 times the budget, so the allowance is negative,
     never clamped to zero, which would read as a preparation that must simply be free.
-    Its walk steps are negative too, and lambda over them would be a negative energy,
-    so there is no rule of thumb. The system and the index alone pass 1,000 qubits. An
-    insertion here is its 1,023 ANDs and one T gate per axis, with no rotation.
+    The uses of H's block encoding it pays for are negative too, and lambda over them
+    would be a negative energy, so there is no rule of thumb. The system and the index
+    alone pass 1,000 qubits. An insertion here is its 1,023 ANDs and one T gate per
+    axis, with no rotation.
 
     Counted one per Toffoli the energy measurement is a third of the budget, and the
     rule of thumb returns, until a 17-bit register takes it over the budget again.
@@ -361,10 +363,10 @@ def test_a_toffoli_counted_as_one_hard_operation_moves_the_rule_of_thumb() -> No
     """The budget's source names "T or Toffoli gates", and we charge a Toffoli as 4 T.
 
     Charged as one operation instead, a rotation's T stay T and the rest falls by four.
-    Carbon's step is 2,603 Toffolis and 4 rotations at 34 T, and the allowance buys
-    about four times the walk steps. So the rule of thumb, lambda over those steps,
-    falls from 10 to 14 MeV to 2.4 to 3.5 MeV: how hard the open problem looks depends
-    on this count.
+    Carbon's step is 2,603 Toffolis and 4 rotations at 34 T, and the allowance pays for
+    about four times the uses of H's block encoding. So the rule of thumb, lambda over
+    those uses, falls from 10 to 14 MeV to 2.4 to 3.5 MeV: how hard the open problem
+    looks depends on this count.
     """
     weak = price_one_circuit(
         CARBON_12, box_side=4, register_bits=12, strength=3.0, current_one_norm=64.0

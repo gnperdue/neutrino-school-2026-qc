@@ -10,8 +10,8 @@ the reasoning is the exercise.
     Exercise 1, a finer register:    --register-bits 13, then --register-bits 14
     Exercise 2, a bigger box:        --box-side 5
     Exercise 3, the current at Z:    --nucleus helium --current-normalized-at-protons
-    Exercise 4, price a preparation: the allowance and the walk steps it buys are in
-                                     the default output
+    Exercise 4, price a preparation: the allowance, and the uses of H's block
+                                     encoding it pays for, are in the default output
     Exercise 5, argon's register:    --nucleus argon
     Exercise 6, the table:           the amplitudes, and what the translations leave
                                      of them, are in the default output
@@ -144,11 +144,12 @@ def t_or_nothing(allowance_t: float) -> str | None:
     return f"{allowance_t:.3g} T"
 
 
-def steps_or_nothing(walk_steps: float) -> str | None:
-    """An allowance in walk steps, or None where nothing is left."""
-    if walk_steps <= 0.0:
+def uses_or_nothing(uses: float) -> str | None:
+    """The uses of H's block encoding an allowance pays for, or None where nothing is
+    left."""
+    if uses <= 0.0:
         return None
-    return f"{walk_steps:,.0f}"
+    return f"{uses:,.0f}"
 
 
 def mev_or_nothing(energy_mev: float | None) -> str | None:
@@ -468,26 +469,28 @@ def print_allowance(weak: OneCircuit, strong: OneCircuit) -> None:
         t_or_nothing(weak.allowance_t), t_or_nothing(strong.allowance_t)
     )
     print(f"  per preparation: {allowance}")
-    steps = from_weak_to_strong(
-        steps_or_nothing(weak.allowance_in_walk_steps),
-        steps_or_nothing(strong.allowance_in_walk_steps),
+    uses = from_weak_to_strong(
+        uses_or_nothing(weak.allowance_in_walk_steps),
+        uses_or_nothing(strong.allowance_in_walk_steps),
     )
-    print(f"  in walk steps: {steps}")
+    print(
+        f"  uses of H's block encoding it pays for, {weak.walk_step_t:,} T each: {uses}"
+    )
     energies = from_weak_to_strong(
         mev_or_nothing(weak.rule_of_thumb_mev), mev_or_nothing(strong.rule_of_thumb_mev)
     )
-    print(f"  lambda over those steps: {energies}")
+    print(f"  lambda over those uses: {energies}")
     print("  if the budget counts a Toffoli as one hard operation instead of 4 T:")
-    counted_steps = from_weak_to_strong(
-        steps_or_nothing(weak_counted.allowance_in_walk_steps),
-        steps_or_nothing(strong_counted.allowance_in_walk_steps),
+    counted_uses = from_weak_to_strong(
+        uses_or_nothing(weak_counted.allowance_in_walk_steps),
+        uses_or_nothing(strong_counted.allowance_in_walk_steps),
     )
-    print(f"    in walk steps: {counted_steps}")
+    print(f"    uses of H's block encoding it pays for: {counted_uses}")
     counted_energies = from_weak_to_strong(
         mev_or_nothing(weak_counted.rule_of_thumb_mev),
         mev_or_nothing(strong_counted.rule_of_thumb_mev),
     )
-    print(f"    lambda over those steps: {counted_energies}")
+    print(f"    lambda over those uses: {counted_energies}")
 
 
 def print_lever(choice: Choice) -> None:
