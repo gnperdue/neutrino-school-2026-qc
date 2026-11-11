@@ -2,7 +2,7 @@
 
 `qc-for-neutrino-nucleus-scattering.pdf` is the lecture deck, "Quantum Computing
 for Neutrino-Nucleus Scattering: what one neutrino-nucleus calculation costs on a
-fault-tolerant quantum computer", for the Fermilab neutrino school on 12 November
+fault-tolerant quantum computer", for the Fermilab neutrino school on 13 November
 2026: 85 slides and 21 back-up slides.
 
 The deck is a working draft until the lecture. This copy is refreshed at
