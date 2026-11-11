@@ -9,12 +9,13 @@ the reasoning is the exercise.
 
     Exercise 1, a finer register:    --register-bits 13, then --register-bits 14
     Exercise 2, a bigger box:        --box-side 5
-    Exercise 3, the current at Z:    --nucleus helium --current-normalized-at-protons
-    Exercise 4, price a preparation: the allowance, and the uses of H's block
+    Exercise 3, price a preparation: the allowance, and the uses of H's block
                                      encoding it pays for, are in the default output
-    Exercise 5, argon's register:    --nucleus argon
-    Exercise 6, the table:           the amplitudes, and what the translations leave
+    Exercise 4, argon's register:    --nucleus argon
+    Exercise 5, the table:           the amplitudes, and what the translations leave
                                      of them, are in the default output
+    The bonus challenge, the current at Z:
+                                     --nucleus helium --current-normalized-at-protons
 
 Each nucleus starts from the lecture's case: carbon on 4^3 with 12 energy bits, helium
 on 3^3 with 11, argon on 5^3 with 13. With a different --box-side and no
