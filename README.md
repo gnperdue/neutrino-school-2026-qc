@@ -3,9 +3,10 @@
 The code behind the resource estimate in the neutrino school's lecture on
 quantum computing: one circuit for carbon on a small lattice, priced piece by
 piece. It holds the library modules the calculation uses, their tests, and a
-script that prints the calculation in the order of the slides.
+script that prints the calculation in the order of the slides. The slides are
+in `slides/`.
 
-Exported 2026-11-10 from commit `843d8a32a7e32236d934b97de9f5107f8f33c19d`.
+Exported 2026-11-11 from commit `8f5f4b1c43eec10150f28f2c52f48ef74059566e`.
 
 ## Quickstart
 
