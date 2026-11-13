@@ -6,7 +6,7 @@ piece. It holds the library modules the calculation uses, their tests, and a
 script that prints the calculation in the order of the slides. The slides are
 in `slides/`.
 
-Exported 2026-11-12 from commit `881828349c5015d272353eb4ed03c6c32a4aa5dd`.
+Exported 2026-11-13 from commit `25a122cfbfdfe507a6044cdcc83df09a74b31871`.
 
 ## Quickstart
 
